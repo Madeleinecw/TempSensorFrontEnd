@@ -19,6 +19,20 @@ const BokehComponent = () => {
         <div>
             <p>A graph going here?</p>
             <div id='myplot' className='bk-root'></div>
+
+            <form id="graph-select-form" >    
+            <div id = "flex-start-graph-input">
+            <label for="start">Start time:</label>
+            <input type="datetime-local" id="graph-start" name='startTime' min="2021-03-22T12:00"/>
+            </div>
+            <div id = "flex-end-graph-input">
+            <label for="end">End time:</label>
+
+            <input type="datetime-local" id="graph-end" name='endTime'/>
+            </div>  
+            <input type = "button" id="getGraph" onclick="changeContent()" value="Get Graph"/>
+
+            </form>
         </div>
     )
 }
