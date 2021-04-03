@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import React from 'react';
-import Bokeh from 'bokehjs';
 
 const BokehComponent = () => {
    
@@ -9,7 +8,7 @@ const BokehComponent = () => {
     const getBokeh = async () => {
         fetch("http://127.0.0.1:5000/bokehall", {method: 'get'})
         .then(res => res.json())
-        .then(data => Bokeh.embed.embed_item(data))
+        .then(data => window.Bokeh.embed.embed_item(data))
     }
 
     useEffect(() => {
@@ -19,7 +18,7 @@ const BokehComponent = () => {
     return (
         <div>
             <p>A graph going here?</p>
-            <div id='myplot'></div>
+            <div id='myplot' className='bk-root'></div>
         </div>
     )
 }
