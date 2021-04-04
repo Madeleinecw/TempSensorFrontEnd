@@ -1,31 +1,32 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Weatherdata from './Components/weatherdata'
 import BokehComponent from './Components/BokehComponent'
 
-class App extends Component {
+const App = () => {
   
-  state  = {
-    weatherdata : [],
-  };
+  const [bokeh, setBokeh] = useState({});
 
-  componentDidMount() {
-    fetch('https://api.openweathermap.org/data/2.5/weather?id=2648579&appid=ab3b10ceeb32e9e2635906ef718eec7f&units=metric')
+  const getBokeh = async () => {
+    var startTime = "2021-04-02T12:00"
+    var endTime = "2021-04-04T12:00"
+    fetch(`http://127.0.0.1:5000/getgraph/${startTime}/${endTime}`, {method: 'get'})
     .then(res => res.json())
-    .then(data => this.setState({weatherdata: data.main}));
+    .then(data => setBokeh(data))
   }
   
-  render() {
+  useEffect(() => {
+    getBokeh()
+    // window.Bokeh.embed.embed_item(bokeh)
+  }, [bokeh])
+
     return (
         <div>
-        <Weatherdata weatherdata={this.state.weatherdata}/>
-        <BokehComponent />
+        <BokehComponent bokeh={bokeh} />
         </div>
     );
-  }
 };
 
-// 21125
-// 341773c0a2b7f33a96d3957a653095c1
+
 
 export default App;
