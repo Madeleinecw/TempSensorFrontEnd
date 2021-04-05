@@ -1,61 +1,68 @@
-import { useRef, useEffect } from "react";
+import { useEffect, useState } from "react";
 import React from 'react';
 
-const BokehComponent = (bokeh) => {
-   
-    const plotRef = useRef(null);
+const BokehComponent = ({bokeh, setBokeh}) => {
 
-    // const getBokeh = async () => {
-    //     var startTime = "2021-04-02T12:00"
-    //     var endTime = "2021-04-04T12:00"
-    //     fetch(`http://127.0.0.1:5000/getgraph/${startTime}/${endTime}`, {method: 'get'})
-    //     .then(res => res.json())
-    //     .then(data => setBokeh(data))
-    // }
+    const [timeFrame, setTimeFrame] = useState({
+        startTime : "",
+        endTime: "",
+    });
 
-    useEffect(() => {
-        plotRef.current = null;
-        window.Bokeh.embed.embed_item(bokeh)
-    }, [bokeh])
+    const handleChange = (e) => {
+        const {id, value} = e.target; 
+        setTimeFrame(prevState => ({
+            ...prevState,
+            [id] : value
+        }))
+    }
 
-    // useEffect(() => {
-    //     getBokeh();
-    // }, [])
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        changeGraph(timeFrame.startTime, timeFrame.endTime)
+    }
 
-    function changeGraph() {
-        var startTime = document.getElementById('graph-start').value;
-        var startAsDate = Date.parse(startTime)
-        var endTime = document.getElementById('graph-end').value;
-        var endAsDate = Date.parse(endTime)
+    const changeBokehScript = (bokehScript) => {
+
+        bokehScript = bokehScript.replace('<script type="text/javascript">','')
+        bokehScript = bokehScript.replace('</script>','')
+
+        var tag = document.getElementById('bokehScriptTag');
+        tag.async = false;
+        tag.textContent = bokehScript;
+        }
+
+    function changeGraph(start, end) {
+        var startAsDate = Date.parse(start)
+        var endAsDate = Date.parse(end)
 
         if (endAsDate <= startAsDate + 599999){
             window.alert("These dates aren't going to work, bro. Please make sure your start time is before your end time and there is an interval of at least ten minutes.")
         } 
         else {
-            fetch(`http://127.0.0.1:5000/getgraph/${startTime}/${endTime}`)
+            fetch(`http://192.168.1.237:5000/getgraph/${start}/${end}`)
                 .then(response => response.json())
-                .then(data => window.Bokeh.embed.embed_item(data));
-
-            console.log('The start time is ' + startTime.replace("T", " ") + ' and the end time is ' + endTime.replace("T", " "))}
+                .then(data => setBokeh(data));
+                changeBokehScript(bokeh.script)
+            }
     }
 
     return (
         <div>
             <p>A graph going here?</p>
-            <div ref={plotRef} id='myplot' className='bk-root'></div>
+            <div dangerouslySetInnerHTML={{__html: bokeh.div}}></div>
 
             <form id="graph-select-form" >    
                 <div id = "flex-start-graph-input">
                     <label htmlFor="start">Start time:</label>
-                    <input type="datetime-local" id="graph-start" name='startTime' min="2021-03-22T12:00"/>
+                    <input type="datetime-local" id='startTime' name='startTime' min="2021-03-22T12:00" onChange={handleChange}/>
                 </div>
                 
                 <div id = "flex-end-graph-input">
                     <label htmlFor="end">End time:</label>
-                    <input type="datetime-local" id="graph-end" name='endTime'/>
+                    <input type="datetime-local" id='endTime' name='endTime' onChange={handleChange}/>
                 </div>  
                 
-                <input type = "button" id="getGraph" onClick={changeGraph} value="Get Graph"/>
+                <input type = "button" id="getGraph" onClick={handleSubmit} value="Get Graph"/>
 
             </form>
         </div>

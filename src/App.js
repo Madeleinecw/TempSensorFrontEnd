@@ -7,22 +7,21 @@ const App = () => {
   
   const [bokeh, setBokeh] = useState({});
 
-  const getBokeh = async () => {
-    var startTime = "2021-04-02T12:00"
-    var endTime = "2021-04-04T12:00"
-    fetch(`http://127.0.0.1:5000/getgraph/${startTime}/${endTime}`, {method: 'get'})
-    .then(res => res.json())
-    .then(data => setBokeh(data))
-  }
+  // const getBokeh = async () => {
+  //   var startTime = "2021-04-02T12:00"
+  //   var endTime = "2021-04-04T12:00"
+  //   fetch(`http://192.168.1.237:5000/getgraph/${startTime}/${endTime}`, {method: 'get'})
+  //   .then(res => res.json())
+  //   .then(data => setBokeh(data))
+  // }
   
-  useEffect(() => {
-    getBokeh()
-    // window.Bokeh.embed.embed_item(bokeh)
-  }, [bokeh])
+  // useEffect(() => {
+  //   getBokeh()
+  // }, [])
 
     return (
         <div>
-        <BokehComponent bokeh={bokeh} />
+        <BokehComponent bokeh={bokeh} setBokeh={setBokeh} />
         </div>
     );
 };
