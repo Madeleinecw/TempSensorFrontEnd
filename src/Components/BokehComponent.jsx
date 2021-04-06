@@ -9,6 +9,8 @@ const BokehComponent = ({bokeh, setBokeh}) => {
     });
 
     const handleChange = (e) => {
+        e.preventDefault();
+
         const {id, value} = e.target; 
         setTimeFrame(prevState => ({
             ...prevState,
@@ -22,13 +24,14 @@ const BokehComponent = ({bokeh, setBokeh}) => {
     }
 
     const changeBokehScript = (bokehScript) => {
+        if (typeof bokehScript !== 'undefined'){
+            bokehScript = bokehScript.replace('<script type="text/javascript">','')
+            bokehScript = bokehScript.replace('</script>','')
 
-        bokehScript = bokehScript.replace('<script type="text/javascript">','')
-        bokehScript = bokehScript.replace('</script>','')
-
-        var tag = document.getElementById('bokehScriptTag');
-        tag.async = false;
-        tag.textContent = bokehScript;
+            var tag = document.getElementById('bokehScriptTag');
+            tag.async = false;
+            tag.textContent = bokehScript;
+    }
         }
 
     function changeGraph(start, end) {
@@ -42,7 +45,8 @@ const BokehComponent = ({bokeh, setBokeh}) => {
             fetch(`http://192.168.1.237:5000/getgraph/${start}/${end}`)
                 .then(response => response.json())
                 .then(data => setBokeh(data));
-                changeBokehScript(bokeh.script)
+
+                changeBokehScript(bokeh.script);
             }
     }
 
@@ -51,7 +55,7 @@ const BokehComponent = ({bokeh, setBokeh}) => {
             <p>A graph going here?</p>
             <div dangerouslySetInnerHTML={{__html: bokeh.div}}></div>
 
-            <form id="graph-select-form" >    
+            <form id="graph-select-form" onSubmit={handleSubmit}>    
                 <div id = "flex-start-graph-input">
                     <label htmlFor="start">Start time:</label>
                     <input type="datetime-local" id='startTime' name='startTime' min="2021-03-22T12:00" onChange={handleChange}/>
@@ -62,7 +66,7 @@ const BokehComponent = ({bokeh, setBokeh}) => {
                     <input type="datetime-local" id='endTime' name='endTime' onChange={handleChange}/>
                 </div>  
                 
-                <input type = "button" id="getGraph" onClick={handleSubmit} value="Get Graph"/>
+                <input type = "submit" id="getGraph" value="Get Graph"/>
 
             </form>
         </div>
