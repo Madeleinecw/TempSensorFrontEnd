@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import BokehComponent from './Components/BokehComponent'
-// import { io } from "socket.io-client"
+import socketIOClient from 'socket.io-client'
+
 
 const App = () => {
 
-  let io = require("socket.io-client")
-  let socket = io("http://192.168.1.237:5000/test");  
-
-  socket.on("connect", () => {
-    console.log(socket.connected); // true
-  });
-
-  socket.on("connect_error", (error) => {
-    console.log(error)
-  });
-
-  const [bokeh, setBokeh] = useState({});
   const [currentTemp, setCurrentTemp] = useState([]);
   const [temperatures, setTemperatures] = useState([])
+  
+  useEffect(() => {
+    const socket = socketIOClient(encodeURI("http://192.168.1.237:5000"))
 
-  socket.on('newTemperature', msg => {  
-    console.log(msg.temperature)
-    setTemperatures(msg.temperature)});
+    socket.on("connect", () => {
+    console.log('connected'); // true
+
+    socket.on('newTemperature', function(msg) {  
+      console.log("getting new temperature")
+      setTemperatures(msg.temperature)});
+  });
+  }, []) 
+
+  const [bokeh, setBokeh] = useState({});
+  
+
+  
 
   const getCurrentTemp = async () => {
     fetch(`http://192.168.1.237:5000/getTemp`, {method: 'get'})
