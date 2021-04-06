@@ -6,7 +6,6 @@ import socketIOClient from 'socket.io-client'
 
 const App = () => {
 
-  const [currentTemp, setCurrentTemp] = useState([]);
   const [temperatures, setTemperatures] = useState([])
   
   useEffect(() => {
@@ -24,22 +23,10 @@ const App = () => {
   const [bokeh, setBokeh] = useState({});
   
 
-  
-
-  const getCurrentTemp = async () => {
-    fetch(`http://192.168.1.237:5000/getTemp`, {method: 'get'})
-    .then(res => res.json())
-    .then(data => setCurrentTemp(data))
-  }
-  
-  useEffect(() => {
-    getCurrentTemp()
-  }, [currentTemp])
-
     return (
         <div>
-          <div>It's currently {currentTemp}&#176;C </div>
-          {temperatures}
+          <div>It's currently {temperatures}&#176;C </div>
+          
         <BokehComponent bokeh={bokeh} setBokeh={setBokeh} />
         </div>
     );
