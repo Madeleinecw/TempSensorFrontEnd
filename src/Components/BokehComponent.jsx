@@ -56,17 +56,17 @@ const BokehComponent = ({bokeh, setBokeh}) => {
             <div dangerouslySetInnerHTML={{__html: bokeh.div}}></div>
 
             <form id="graph-select-form" onSubmit={handleSubmit}>    
-                <div id = "flex-start-graph-input">
+                <div id="flex-start-graph-input">
                     <label htmlFor="start">Start time:</label>
                     <input type="datetime-local" id='startTime' name='startTime' min="2021-03-22T12:00" onChange={handleChange}/>
                 </div>
                 
-                <div id = "flex-end-graph-input">
+                <div id="flex-end-graph-input">
                     <label htmlFor="end">End time:</label>
                     <input type="datetime-local" id='endTime' name='endTime' onChange={handleChange}/>
                 </div>  
                 
-                <input type = "submit" id="getGraph" value="Get Graph"/>
+                <input type="submit" id="getGraph" value="Get Graph"/>
 
             </form>
         </div>
