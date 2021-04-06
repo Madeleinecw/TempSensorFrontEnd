@@ -8,19 +8,14 @@ const BokehComponent = ({bokeh, setBokeh}) => {
         endTime: "",
     });
 
-    const handleChange = (e) => {
-        e.preventDefault();
-
-        const {id, value} = e.target; 
-        setTimeFrame(prevState => ({
-            ...prevState,
-            [id] : value
-        }))
-    }
+    useEffect(() => {
+        changeBokehScript(bokeh.script);
+    }, [bokeh])
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        changeGraph(timeFrame.startTime, timeFrame.endTime)
+        console.log(e)
+        changeGraph(e.target[0].value, e.target[1].value)
     }
 
     const changeBokehScript = (bokehScript) => {
@@ -46,9 +41,11 @@ const BokehComponent = ({bokeh, setBokeh}) => {
                 .then(response => response.json())
                 .then(data => setBokeh(data));
 
-                changeBokehScript(bokeh.script);
+                
             }
     }
+
+
 
     return (
         <div>
@@ -58,12 +55,12 @@ const BokehComponent = ({bokeh, setBokeh}) => {
             <form id="graph-select-form" onSubmit={handleSubmit}>    
                 <div id="flex-start-graph-input">
                     <label htmlFor="start">Start time:</label>
-                    <input type="datetime-local" id='startTime' name='startTime' min="2021-03-22T12:00" onChange={handleChange}/>
+                    <input type="datetime-local" id='startTime' name='startTime' min="2021-03-22T12:00" />
                 </div>
                 
                 <div id="flex-end-graph-input">
                     <label htmlFor="end">End time:</label>
-                    <input type="datetime-local" id='endTime' name='endTime' onChange={handleChange}/>
+                    <input type="datetime-local" id='endTime' name='endTime' />
                 </div>  
                 
                 <input type="submit" id="getGraph" value="Get Graph"/>
