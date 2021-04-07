@@ -9,8 +9,8 @@ const BokehComponent = ({bokeh, setBokeh}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(e)
-        changeGraph(e.target[0].value, e.target[1].value)
+        console.log(e.target.startTime.value)
+        changeGraph(e.target.startTime.value, e.target.endTime.value)
     }
 
     const changeBokehScript = (bokehScript) => {
