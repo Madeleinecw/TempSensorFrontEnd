@@ -1,14 +1,9 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useEffect, useState } from "react";
 import React from 'react';
 
 const BokehComponent = ({bokeh, setBokeh}) => {
 
-    const [timeFrame, setTimeFrame] = useState({
-        startTime : "",
-        endTime: "",
-    });
-
-    useEffect(() => {
+    useLayoutEffect(() => {
         changeBokehScript(bokeh.script);
     }, [bokeh])
 
@@ -19,17 +14,19 @@ const BokehComponent = ({bokeh, setBokeh}) => {
     }
 
     const changeBokehScript = (bokehScript) => {
+        console.log("change script");
+
         if (typeof bokehScript !== 'undefined'){
             bokehScript = bokehScript.replace('<script type="text/javascript">','')
             bokehScript = bokehScript.replace('</script>','')
 
-            var tag = document.getElementById('bokehScriptTag');
-            tag.async = false;
-            tag.textContent = bokehScript;
-    }
+            var bokehFunction = new Function(bokehScript);
+            bokehFunction();
         }
+    }
 
     function changeGraph(start, end) {
+        console.log("change graph");
         var startAsDate = Date.parse(start)
         var endAsDate = Date.parse(end)
 
@@ -39,17 +36,19 @@ const BokehComponent = ({bokeh, setBokeh}) => {
         else {
             fetch(`http://192.168.1.237:5000/getgraph/${start}/${end}`)
                 .then(response => response.json())
-                .then(data => setBokeh(data));
-
-                
-            }
+                .then(data => setBokeh(data));                
+        }
     }
 
 
 
     return (
         <div>
+        {console.log("rendering")}
+
             <p>A graph going here?</p>
+            {/* <div dangerouslySetInnerHTML={{__html: bokeh.script}}></div> */}
+
             <div dangerouslySetInnerHTML={{__html: bokeh.div}}></div>
 
             <form id="graph-select-form" onSubmit={handleSubmit}>    
