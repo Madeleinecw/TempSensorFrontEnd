@@ -8,18 +8,26 @@ const App = () => {
 
   const [temperatures, setTemperatures] = useState([])
   
+  const socket = socketIOClient("http://192.168.1.237:5000");
+
   useEffect(() => {
-    const socket = socketIOClient(encodeURI("http://192.168.1.237:5000"))
 
-    socket.on("connect", () => {
-    console.log(`Connected? ${socket.connected}`); // true
+    // socket.on("connect", () => {
+    // console.log(`Connected? ${socket.connected}`); // true
+    // });
 
-    socket.on('newTemperature', function(msg) {  
+    socket.on('newTemperature', (msg) => {  
       console.log("getting new temperature")
       setTemperatures(msg.temperature)
       });
-    });
-  }, []) 
+  }, [])
+
+  // useEffect(() => {
+  //   socket.on('newTemperature', (msg) => {  
+  //     console.log("getting new temperature")
+  //     setTemperatures(msg.temperature)
+  //     });
+  // }, [])
 
   const [bokeh, setBokeh] = useState({});
   
