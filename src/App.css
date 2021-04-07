@@ -18,3 +18,8 @@
   font-size: large;
 }
 
+.bokeh-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

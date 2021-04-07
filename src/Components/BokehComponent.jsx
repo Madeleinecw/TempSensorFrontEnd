@@ -3,7 +3,7 @@ import React from 'react';
 
 const BokehComponent = ({bokeh, setBokeh}) => {
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         changeBokehScript(bokeh.script);
     }, [bokeh])
 
@@ -44,12 +44,7 @@ const BokehComponent = ({bokeh, setBokeh}) => {
 
     return (
         <div>
-        {console.log("rendering")}
-
-            <p>A graph going here?</p>
-            {/* <div dangerouslySetInnerHTML={{__html: bokeh.script}}></div> */}
-
-            <div dangerouslySetInnerHTML={{__html: bokeh.div}}></div>
+            <div className="bokeh-container" dangerouslySetInnerHTML={{__html: bokeh.div}}></div>
 
             <form id="graph-select-form" onSubmit={handleSubmit}>    
                 <div id="flex-start-graph-input">
