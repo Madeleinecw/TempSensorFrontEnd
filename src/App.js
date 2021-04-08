@@ -6,35 +6,43 @@ import socketIOClient from 'socket.io-client'
 
 const App = () => {
 
-  const [temperatures, setTemperatures] = useState([])
+  const [temperatures, setTemperatures] = useState([]);
+  const [outsideTemp, setOutsideTemp] = useState([]);
+  const [feelsLikeTemp, setFeelsLikeTemp] = useState([]);
+  const [time, setTime] = useState([]);
   
-  const socket = socketIOClient("http://192.168.1.237:5000");
+  
 
   useEffect(() => {
 
-    // socket.on("connect", () => {
-    // console.log(`Connected? ${socket.connected}`); // true
-    // });
+    const socket = socketIOClient("http://192.168.1.237:5000");
 
     socket.on('newTemperature', (msg) => {  
-      console.log("getting new temperature")
       setTemperatures(msg.temperature)
       });
-  }, [])
 
-  // useEffect(() => {
-  //   socket.on('newTemperature', (msg) => {  
-  //     console.log("getting new temperature")
-  //     setTemperatures(msg.temperature)
-  //     });
-  // }, [])
+    socket.on('newTime', (msg) => {  
+      setTime(msg.time)
+      });
+
+    socket.on('newOutsideTemp', (msg) => {
+      setOutsideTemp(msg.outsideTemp)
+      });
+    
+    socket.on('newOutsideFeelsLike', (msg) => {
+      setFeelsLikeTemp(msg.outsideFeelsLikeTemperature)
+    })
+  }, [time])
+
+
 
   const [bokeh, setBokeh] = useState({});
   
 
     return (
         <div>
-          <div>It's currently {temperatures}&#176;C </div>
+          <div>It's currently {time} and {temperatures}&#176;C </div>
+          <div>Outside it's currently {outsideTemp}&#176;C but it feels more like {feelsLikeTemp}&#176;C</div>
           
         <BokehComponent bokeh={bokeh} setBokeh={setBokeh} />
         </div>
