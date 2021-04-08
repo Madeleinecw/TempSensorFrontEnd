@@ -32,7 +32,7 @@ const App = () => {
     socket.on('newOutsideFeelsLike', (msg) => {
       setFeelsLikeTemp(msg.outsideFeelsLikeTemperature)
     })
-  }, [time])
+  }, [])
 
 
 
