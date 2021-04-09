@@ -21,9 +21,9 @@ const App = () => {
       setTemperatures(msg.temperature)
       });
 
-    socket.on('newTime', (msg) => {  
-      setTime(msg.time)
-      });
+    // socket.on('newTime', (msg) => {  
+    //   setTime(msg.time)
+    //   });
 
     socket.on('newOutsideTemp', (msg) => {
       setOutsideTemp(msg.outsideTemp)
@@ -34,14 +34,12 @@ const App = () => {
     })
   }, [])
 
-
-
   const [bokeh, setBokeh] = useState({});
   
 
     return (
         <div>
-          <div>It's currently {time} and {temperatures}&#176;C </div>
+          <div>It's currently blah and {temperatures}&#176;C </div>
           <div>Outside it's currently {outsideTemp}&#176;C but it feels more like {feelsLikeTemp}&#176;C</div>
           
         <BokehComponent bokeh={bokeh} setBokeh={setBokeh} />
