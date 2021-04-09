@@ -64,12 +64,12 @@ const BokehComponent = ({bokeh, setBokeh}) => {
     }
 
     const myResponsiveLine = ({ data }) => ( 
-            <ResponsiveLine data = { data }
-            margin = {{ top: 50, right: 110, bottom: 50, left: 60 }}
-            xScale = {{ type: 'linear' }}
-            yScale = {{ type: 'point' }}
-            yFormat = ">-.2g"
-            axisTop = {null}
+            <ResponsiveLine data={ data }
+            margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+            xScale={{ type: 'linear' }}
+            yScale={{ type: 'point' }}
+            yFormat=">-.2g"
+            axisTop={null}
             axisRight={null}
             axisBottom={{
                 orient: 'bottom',
