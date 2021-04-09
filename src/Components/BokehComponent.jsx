@@ -27,11 +27,6 @@ const BokehComponent = ({bokeh, setBokeh}) => {
         }
     }
 
-    // useEffect(() => {
-    //     let tempRangeOfTemperatures = [...bokeh]
-    //     setFormattedData(formatData(tempRangeOfTemperatures));
-    // }, [bokeh])
-
     const formatData = (rangeOfTemperatures) => {
         // console.log(rangeOfTemperatures)
         let data = [
@@ -127,8 +122,7 @@ const BokehComponent = ({bokeh, setBokeh}) => {
 
     return (
         <div>
-            {/* <div className="bokeh-container" dangerouslySetInnerHTML={{__html: bokeh.div}}></div> */}
-            {/* <div>{formatData(bokeh)}</div> */}
+            {/* <div>{myResponsiveLine(formattedData)}</div> */}
 
             <form id="graph-select-form" onSubmit={handleSubmit}>    
                 <div id="flex-start-graph-input">
