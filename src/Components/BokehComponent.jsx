@@ -120,10 +120,27 @@ const BokehComponent = ({bokeh, setBokeh}) => {
         )
 
 
+        function lineGraph() {
+                return 
+                <div>{myResponsiveLine(formattedData)}</div>;
+            }
+        
+        function noGraph() {
+            return <div>Please select some dates</div>;
+        }
+
+        function graphCheck() {
+            if (!formattedData) {
+                return <noGraph/>;
+            }
+            else {
+                return <lineGraph/>;
+            }
+        }
+
     return (
         <div>
-            {/* <div>{myResponsiveLine(formattedData)}</div> */}
-
+            <graphCheck/>
             <form id="graph-select-form" onSubmit={handleSubmit}>    
                 <div id="flex-start-graph-input">
                     <label htmlFor="start">Start time:</label>
