@@ -1,32 +1,18 @@
 import { useLayoutEffect, useEffect, useState } from "react";
 import React from 'react';
+import {ResponsiveLine} from '@nivo/line'
 
 const BokehComponent = ({bokeh, setBokeh}) => {
 
-    useEffect(() => {
-        changeBokehScript(bokeh.script);
-    }, [bokeh])
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(e.target.startTime.value)
         changeGraph(e.target.startTime.value, e.target.endTime.value)
     }
 
-    const changeBokehScript = (bokehScript) => {
-        console.log("change script");
-
-        if (typeof bokehScript !== 'undefined'){
-            bokehScript = bokehScript.replace('<script type="text/javascript">','')
-            bokehScript = bokehScript.replace('</script>','')
-
-            var bokehFunction = new Function(bokehScript);
-            bokehFunction();
-        }
-    }
 
     function changeGraph(start, end) {
-        console.log("change graph");
         var startAsDate = Date.parse(start)
         var endAsDate = Date.parse(end)
 
@@ -40,21 +26,113 @@ const BokehComponent = ({bokeh, setBokeh}) => {
         }
     }
 
+    const formatData = function(rangeOfTemperatures){
+        console.log(rangeOfTemperatures)
+        let data = [
+            {id: 'inside',
+            data: []},
+            {id: 'Outside',
+            data: []},
+            {id: 'Feels Like',
+            data: []}
+        ];
 
+        let inside = [];
+        let outside = [];
+        let feelsLike = [];
+
+        for (let i in rangeOfTemperatures) {
+            let insideRange = { x: i[3], y: i[0] };
+            let outsideRange = { x: i[3], y: i[1] };
+            let feelsLikeRange = { x: i[3], y: i[2] };
+            inside.push(insideRange);
+            outside.push(outsideRange);
+            feelsLike.push(feelsLikeRange);
+        }
+        
+        data[0].data = inside
+        data[1].data = outside
+        data[2].data = feelsLike 
+        return data
+    }
+
+    const myResponsiveLine = ({ data }) => ( 
+            <ResponsiveLine data = { data }
+            margin = {{ top: 50, right: 110, bottom: 50, left: 60 }}
+            xScale = {{ type: 'linear' }}
+            yScale = {{ type: 'point' }}
+            yFormat = ">-.2g"
+            axisTop = {null}
+            axisRight={null}
+            axisBottom={{
+                orient: 'bottom',
+                tickSize: 5,
+                tickPadding: 5, 
+                tickRotation: 0,
+                legend : 'Date and Time',
+                legendOffset: 36,
+                legendPosition: 'middle'
+            }}
+            axisLeft={{
+                orient: 'left',
+                tickSize: 5,
+                tickPadding: 5,
+                tickRotation: 0,
+                legend: 'count',
+                legendOffset: -40,
+                legendPosition: 'middle'
+            }}
+            pointSize={10}
+        pointColor={{ theme: 'background' }}
+        pointBorderWidth={2}
+        pointBorderColor={{ from: 'serieColor' }}
+        pointLabelYOffset={-12}
+        useMesh={true}
+        legends={[
+            {
+                anchor: 'bottom-right',
+                direction: 'column',
+                justify: false,
+                translateX: 100,
+                translateY: 0,
+                itemsSpacing: 0,
+                itemDirection: 'left-to-right',
+                itemWidth: 80,
+                itemHeight: 20,
+                itemOpacity: 0.75,
+                symbolSize: 12,
+                symbolShape: 'circle',
+                symbolBorderColor: 'rgba(0, 0, 0, .5)',
+                effects: [
+                    {
+                        on: 'hover',
+                        style: {
+                            itemBackground: 'rgba(0, 0, 0, .03)',
+                            itemOpacity: 1
+                        }
+                    }
+                ]
+            }
+            ]}
+            />
+        )
+
+    let graphData = formatData(bokeh)
 
     return (
         <div>
-            <div className="bokeh-container" dangerouslySetInnerHTML={{__html: bokeh.div}}></div>
+            {/* <div className="bokeh-container" dangerouslySetInnerHTML={{__html: bokeh.div}}></div> */}
+            <div>{myResponsiveLine(formatData(bokeh))}</div>
 
             <form id="graph-select-form" onSubmit={handleSubmit}>    
                 <div id="flex-start-graph-input">
                     <label htmlFor="start">Start time:</label>
-                    <input type="datetime-local" id='startTime' name='startTime' min="2021-03-22T12:00" />
+                    <input type="datetime-local" id='startTime' name='startTime' value="2021-04-01T12:00" />
                 </div>
                 
                 <div id="flex-end-graph-input">
                     <label htmlFor="end">End time:</label>
-                    <input type="datetime-local" id='endTime' name='endTime' />
+                    <input type="datetime-local" id='endTime' name='endTime' value="2021-04-02T12:00"/>
                 </div>  
                 
                 <input type="submit" id="getGraph" value="Get Graph"/>
