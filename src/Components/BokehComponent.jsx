@@ -1,10 +1,11 @@
 import { useLayoutEffect, useEffect, useState } from "react";
 import React from 'react';
 import {ResponsiveLine} from '@nivo/line'
+import { range } from "d3-array";
 
 const BokehComponent = ({bokeh, setBokeh}) => {
 
-
+    const [formattedData, setFormattedData] = useState();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -22,12 +23,17 @@ const BokehComponent = ({bokeh, setBokeh}) => {
         else {
             fetch(`http://192.168.1.237:5000/getgraph/${start}/${end}`)
                 .then(response => response.json())
-                .then(data => setBokeh(data));                
+                .then(data => setFormattedData(formatData(data)));                
         }
     }
 
-    const formatData = function(rangeOfTemperatures){
-        console.log(rangeOfTemperatures)
+    // useEffect(() => {
+    //     let tempRangeOfTemperatures = [...bokeh]
+    //     setFormattedData(formatData(tempRangeOfTemperatures));
+    // }, [bokeh])
+
+    const formatData = (rangeOfTemperatures) => {
+        // console.log(rangeOfTemperatures)
         let data = [
             {id: 'inside',
             data: []},
@@ -41,7 +47,8 @@ const BokehComponent = ({bokeh, setBokeh}) => {
         let outside = [];
         let feelsLike = [];
 
-        for (let i in rangeOfTemperatures) {
+        for (let i of rangeOfTemperatures) {
+            console.log(i[3]);
             let insideRange = { x: i[3], y: i[0] };
             let outsideRange = { x: i[3], y: i[1] };
             let feelsLikeRange = { x: i[3], y: i[2] };
@@ -117,12 +124,11 @@ const BokehComponent = ({bokeh, setBokeh}) => {
             />
         )
 
-    let graphData = formatData(bokeh)
 
     return (
         <div>
             {/* <div className="bokeh-container" dangerouslySetInnerHTML={{__html: bokeh.div}}></div> */}
-            <div>{myResponsiveLine(formatData(bokeh))}</div>
+            {/* <div>{formatData(bokeh)}</div> */}
 
             <form id="graph-select-form" onSubmit={handleSubmit}>    
                 <div id="flex-start-graph-input">
