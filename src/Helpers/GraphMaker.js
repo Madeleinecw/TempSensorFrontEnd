@@ -24,7 +24,7 @@ class GraphMaker {
             <ResponsiveLine data = { data }
             margin = {{ top: 50, right: 110, bottom: 50, left: 60 }}
             xScale = {{ type: 'linear' }}
-            yScale = {{ type: 'point' }}
+            yScale = {{ type: 'linear' }}
             yFormat = ">-.2g"
             axisTop = {null}
             axisRight={null}

@@ -1,37 +1,35 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
 }
 
 body {
-  align-items: center;
-  text-align: center;
-  background-color: #941B0C;
-  font-family: 'Poppins', sans-serif;
-  color: #F6AA1C;
+    align-items: center;
+    text-align: center;
+    background-color: #621708;
+    font-family: 'Poppins', sans-serif;
+    color: #F6AA1C;
 }
 
 #graph-select-form {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  color: #F6AA1C
-}
-#flex-start-graph-input {
-  padding: 10px
-}
-#flex-end-graph-input {
-  padding: 10px;
-  margin-right: 10px
-}
-#select-graph-text {
-  color: #F6AA1C
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    color: #F6AA1C
 }
 
-#myplot {
-  align-items: center;
-  justify-content: center;
+#flex-start-graph-input {
+    padding: 10px
+}
+
+#flex-end-graph-input {
+    padding: 10px;
+    margin-right: 10px
+}
+
+#select-graph-text {
+    color: #F6AA1C
 }

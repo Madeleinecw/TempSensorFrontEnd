@@ -34,14 +34,14 @@ const BokehComponent = ({ bokeh, setBokeh }) => {
                 'id': 'inside',
                 'data': []
             },
-            // {
-            //     'id': 'Outside',
-            //     'data': []
-            // },
-            // {
-            //     'id': 'Feels Like',
-            //     'data': []
-            // }
+            {
+                'id': 'Outside',
+                'data': []
+            },
+            {
+                'id': 'Feels Like',
+                'data': []
+            }
         ];
 
         let inside = [];
@@ -52,38 +52,38 @@ const BokehComponent = ({ bokeh, setBokeh }) => {
             let formattedDatetime = new Date(i[3]);
             let blahTime = `${formattedDatetime.getFullYear()}-${(formattedDatetime.getMonth() + 1).toString().padStart(2, '0')}-${formattedDatetime.getDate().toString().padStart(2, '0')} ${(formattedDatetime.getHours().toString().padStart(2, '0'))}:${formattedDatetime.getMinutes().toString().padEnd(2, '0')}`;
             let insideRange = { x: blahTime, y: i[0] };
-            // let outsideRange = { x: i[3], y: i[1] };
-            // let feelsLikeRange = { x: i[3], y: i[2] };
+            let outsideRange = { x: blahTime, y: i[1] };
+            let feelsLikeRange = { x: blahTime, y: i[2] };
 
-            console.log(insideRange);
             inside.push(insideRange);
-            // outside.push(outsideRange);
-            // feelsLike.push(feelsLikeRange);
+            outside.push(outsideRange);
+            feelsLike.push(feelsLikeRange);
         }
 
         data[0].data = inside
-        // data[1].data = outside
-        // data[2].data = feelsLike
+        data[1].data = outside
+        data[2].data = feelsLike
         return data
     }
 
     const MyResponsiveLine = ({ data }) => (
             <ResponsiveLine data={data}
-                margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+                margin={{ top: 70, right: 50, bottom: 70, left: 85 }}
                 xScale={{ type: 'time', format:"%Y-%m-%d %H:%M"}}
-                yScale={{ type: 'point' }}
+                yScale={{ type: 'linear', min:-5 }}
                 xFormat="time:%Y-%m-%d %H:%M"
                 yFormat=">-.0g"
                 axisTop={null}
                 axisRight={null}
                 axisBottom={null}
+                colors={{scheme:'yellow_orange_brown'}}
+                enableGridX={false}
                 axisBottom={{
                     orient: 'bottom',
-                    format: 'time:%Y-%m-%d %H:%M',
+                    format: '%Y-%m-%d %H:%M',
                     tickSize: 5,
                     tickPadding: 5,
-                    tickRotation: 0,
-                    legend: 'Date and Time',
+                    tickRotation: -25,
                     legendOffset: 36,
                     legendPosition: 'middle'
                 }}
@@ -104,11 +104,11 @@ const BokehComponent = ({ bokeh, setBokeh }) => {
                 useMesh={true}
                 legends={[
                     {
-                        anchor: 'bottom-right',
-                        direction: 'column',
+                        anchor: 'top',
+                        direction: 'row',
                         justify: false,
                         translateX: 100,
-                        translateY: 0,
+                        translateY: -50,
                         itemsSpacing: 0,
                         itemDirection: 'left-to-right',
                         itemWidth: 80,
@@ -147,19 +147,21 @@ const BokehComponent = ({ bokeh, setBokeh }) => {
 
     return (
         <div>
+            <div className='graph-wrapper'>
             <div className='graph-container'>
                 <GraphCheck />
+            </div>
             </div>
 
             <form id="graph-select-form" onSubmit={handleSubmit}>
                 <div id="flex-start-graph-input">
                     <label htmlFor="start">Start time:</label>
-                    <input type="datetime-local" id='startTime' name='startTime' value="2021-04-01T12:00" />
+                    <input type="datetime-local" id='startTime' name='startTime' value="2021-04-01T11:00" />
                 </div>
 
                 <div id="flex-end-graph-input">
                     <label htmlFor="end">End time:</label>
-                    <input type="datetime-local" id='endTime' name='endTime' value="2021-04-02T12:00" />
+                    <input type="datetime-local" id='endTime' name='endTime' value="2021-04-01T23:00" />
                 </div>
 
                 <input type="submit" id="getGraph" value="Get Graph" />
