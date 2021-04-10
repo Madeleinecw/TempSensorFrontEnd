@@ -15,33 +15,3 @@ body {
     font-family: 'Poppins', sans-serif;
     color: #151D17;
 }
-
-#graph-select-form {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    color: #151D17
-}
-
-#flex-start-graph-input {
-    padding: 10px
-}
-
-#flex-start-graph-input>label {
-    padding: 10px
-}
-
-#flex-end-graph-input {
-    padding: 10px;
-    margin-right: 10px
-}
-
-#flex-end-graph-input>label {
-    padding: 10px
-}
-
-#select-graph-text {
-    color: #151D17
-}

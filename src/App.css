@@ -18,31 +18,3 @@
 .App-intro {
     font-size: large;
 }
-
-.bokeh-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.graph-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.graph-container {
-    display: flex;
-    height: 600px;
-    width: 1200px;
-    background-color: #E1D7D6;
-    box-shadow: -2px 0px 30px -14px #BCA8A4;
-    border-radius: 40px;
-    align-items: center;
-    justify-content: center;
-}
-
-.noGraph-text {
-    font-size: x-large;
-    color: #151D17;
-}

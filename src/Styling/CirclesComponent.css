@@ -1,0 +1,36 @@
+.circles-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.temperatures-circle {
+    background-color: #BDCBCE;
+    padding: 30px;
+    border-radius: 100px;
+}
+
+.temperatures-circle>.label {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.outside-circle {
+    background-color: #CEBDCB;
+    padding: 30px;
+    border-radius: 100px;
+}
+
+.outside-circle>.label {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.feelsLike-circle {
+    background-color: #C6D5C8;
+    padding: 30px;
+    border-radius: 100px;
+}

@@ -1,8 +1,7 @@
-import { useLayoutEffect, useEffect, useState } from "react";
+import { useState } from "react";
 import React from 'react';
 import { ResponsiveLine } from '@nivo/line'
-import { range } from "d3-array";
-import {time} from 'd3';
+import '../Styling/GraphComponent.css'
 
 const BokehComponent = ({ bokeh, setBokeh }) => {
 
