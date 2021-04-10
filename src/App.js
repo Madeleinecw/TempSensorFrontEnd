@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import BokehComponent from './Components/BokehComponent'
 import socketIOClient from 'socket.io-client'
+import CirclesComponent from './Components/CirclesComponent';
 
 
 const App = () => {
@@ -39,9 +40,7 @@ const App = () => {
 
     return (
         <div>
-          <div>It's currently blah and {temperatures}&#176;C </div>
-          <div>Outside it's currently {outsideTemp}&#176;C but it feels more like {feelsLikeTemp}&#176;C</div>
-          
+        <CirclesComponent temperatures={temperatures} feelsLikeTemp={feelsLikeTemp} outsideTemp={outsideTemp} />  
         <BokehComponent bokeh={bokeh} setBokeh={setBokeh} />
         </div>
     );

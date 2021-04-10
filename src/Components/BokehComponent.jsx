@@ -76,7 +76,7 @@ const BokehComponent = ({ bokeh, setBokeh }) => {
                 axisTop={null}
                 axisRight={null}
                 axisBottom={null}
-                colors={{scheme:'yellow_orange_brown'}}
+                colors={["#A4B8BC", "#BCA4B8", "#A5BDA9"]}
                 enableGridX={false}
                 axisBottom={{
                     orient: 'bottom',
@@ -97,6 +97,15 @@ const BokehComponent = ({ bokeh, setBokeh }) => {
                     legendPosition: 'middle'
                 }}
                 pointSize={5}
+                theme={{
+                    "textColor": "#4B654F",
+                    "grid": {
+                        "line": {
+                            "stroke": "#ECE6E5"
+                        }
+                    }
+                }
+                }
                 pointColor={{ theme: 'background' }}
                 pointBorderWidth={2}
                 pointBorderColor={{ from: 'serieColor' }}
@@ -132,7 +141,7 @@ const BokehComponent = ({ bokeh, setBokeh }) => {
     )
 
     function NoGraph() {
-        return <div>Please select some dates</div>;
+        return <div className="noGraph-text">Please select some dates</div>;
     }
 
     function GraphCheck() {
