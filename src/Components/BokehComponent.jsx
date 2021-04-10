@@ -97,7 +97,7 @@ const BokehComponent = ({ bokeh, setBokeh }) => {
                 }}
                 pointSize={5}
                 theme={{
-                    "textColor": "#4B654F",
+                    "textColor": "#151D17",
                     "grid": {
                         "line": {
                             "stroke": "#ECE6E5"
