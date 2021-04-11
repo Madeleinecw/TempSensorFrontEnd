@@ -1,6 +1,6 @@
-import React from 'react';
 
-const formatData = (rangeOfTemperatures) => {
+class FormatData{
+formatData = (rangeOfTemperatures) => {
         let data = [
             {
                 'id': 'inside',
@@ -37,5 +37,6 @@ const formatData = (rangeOfTemperatures) => {
         data[2].data = feelsLike
         return data
     }
+}
 
-export default formatData
+export default FormatData
