@@ -95,7 +95,7 @@ const BokehComponent = ({ bokeh, setBokeh }) => {
                     legendOffset: -40,
                     legendPosition: 'middle'
                 }}
-                pointSize={5}
+                pointSize={1}
                 theme={{
                     "textColor": "#151D17",
                     "grid": {

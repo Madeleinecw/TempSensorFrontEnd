@@ -1,52 +1,46 @@
 import React from 'react';
 import { ResponsiveLine } from '@nivo/line'
 
-class GraphMaker {
-
-    formatData = function(rangeOfTemperatures){
-        let data = {
-            inside: [],
-            outside: [],
-            feelsLike: []
-        };
-           for (let i = 0; i > rangeOfTemperatures.length(); i++) {
-            let insideRange = { x: i[3], y: i[0] };
-            let outsideRange = { x: i[3], y: i[1] };
-            let feelsLikeRange = { x: i[3], y: i[2] };
-            data.inside.push(insideRange);
-            data.outside.push(outsideRange);
-            data.feelsLike.push(feelsLikeRange);
+const MyResponsiveLine = ({ data }) => (
+    <ResponsiveLine data={data}
+        margin={{ top: 70, right: 50, bottom: 70, left: 85 }}
+        xScale={{ type: 'time', format:"%Y-%m-%d %H:%M"}}
+        yScale={{ type: 'linear', min:-5 }}
+        xFormat="time:%Y-%m-%d %H:%M"
+        yFormat=">-.0g"
+        axisTop={null}
+        axisRight={null}
+        axisBottom={null}
+        colors={["#A4B8BC", "#BCA4B8", "#A5BDA9"]}
+        enableGridX={false}
+        axisBottom={{
+            orient: 'bottom',
+            format: '%Y-%m-%d %H:%M',
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: -25,
+            legendOffset: 36,
+            legendPosition: 'middle'
+        }}
+        axisLeft={{
+            orient: 'left',
+            tickSize: 1,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: 'Temperature',
+            legendOffset: -40,
+            legendPosition: 'middle'
+        }}
+        pointSize={1}
+        theme={{
+            "textColor": "#151D17",
+            "grid": {
+                "line": {
+                    "stroke": "#ECE6E5"
+                }
+            }
         }
-        return data
-    }
-
-    myResponsiveLine = ({ data }) => ( 
-            <ResponsiveLine data = { data }
-            margin = {{ top: 50, right: 110, bottom: 50, left: 60 }}
-            xScale = {{ type: 'linear' }}
-            yScale = {{ type: 'linear' }}
-            yFormat = ">-.2g"
-            axisTop = {null}
-            axisRight={null}
-            axisBottom={{
-                orient: 'bottom',
-                tickSize: 5,
-                tickPadding: 5, 
-                tickRotation: 0,
-                legend : 'Date and Time',
-                legendOffset: 36,
-                legendPosition: 'middle'
-            }}
-            axisLeft={{
-                orient: 'left',
-                tickSize: 5,
-                tickPadding: 5,
-                tickRotation: 0,
-                legend: 'count',
-                legendOffset: -40,
-                legendPosition: 'middle'
-            }}
-            pointSize={10}
+        }
         pointColor={{ theme: 'background' }}
         pointBorderWidth={2}
         pointBorderColor={{ from: 'serieColor' }}
@@ -54,11 +48,11 @@ class GraphMaker {
         useMesh={true}
         legends={[
             {
-                anchor: 'bottom-right',
-                direction: 'column',
+                anchor: 'top',
+                direction: 'row',
                 justify: false,
                 translateX: 100,
-                translateY: 0,
+                translateY: -50,
                 itemsSpacing: 0,
                 itemDirection: 'left-to-right',
                 itemWidth: 80,
@@ -77,9 +71,8 @@ class GraphMaker {
                     }
                 ]
             }
-            ]}
-            />
-        )
-    }
+        ]}
+    />
+)
 
     export default GraphMaker;
