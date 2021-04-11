@@ -8,10 +8,10 @@ body {
     align-items: center;
     text-align: center;
     background: hsla(132, 15%, 87%, 1);
-    background: linear-gradient(90deg, hsla(132, 15%, 87%, 1) 0%, hsla(140, 13%, 95%, 0.5) 70%);
-    background: -moz-linear-gradient(90deg, hsla(132, 15%, 87%, 1) 0%, hsla(140, 13%, 95%, 0.5) 70%);
-    background: -webkit-linear-gradient(90deg, hsla(132, 15%, 87%, 1) 0%, hsla(140, 13%, 95%, 0.5) 70%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#D8E2DA", endColorstr="#F2F5F3", GradientType=1);
+    background: linear-gradient(90deg, hsla(132, 15%, 87%, 1) 0%, hsla(0, 16%, 93%, 1) 100%);
+    background: -moz-linear-gradient(90deg, hsla(132, 15%, 87%, 1) 0%, hsla(0, 16%, 93%, 1) 100%);
+    background: -webkit-linear-gradient(90deg, hsla(132, 15%, 87%, 1) 0%, hsla(0, 16%, 93%, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#D8E2DA", endColorstr="#EFE9E9", GradientType=1);
     font-family: 'Poppins', sans-serif;
     color: #151D17;
 }

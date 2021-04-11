@@ -91,7 +91,7 @@ const BokehComponent = ({ bokeh, setBokeh }) => {
                     tickSize: 1,
                     tickPadding: 5,
                     tickRotation: 0,
-                    legend: 'count',
+                    legend: 'Temperature',
                     legendOffset: -40,
                     legendPosition: 'middle'
                 }}
@@ -164,12 +164,12 @@ const BokehComponent = ({ bokeh, setBokeh }) => {
             <form id="graph-select-form" onSubmit={handleSubmit}>
                 <div id="flex-start-graph-input">
                     <label htmlFor="start">Start time:</label>
-                    <input type="datetime-local" id='startTime' name='startTime' value="2021-04-01T11:00" />
+                    <input type="datetime-local" id='startTime' name='startTime' min="2021-03-31T09:00" />
                 </div>
 
                 <div id="flex-end-graph-input">
                     <label htmlFor="end">End time:</label>
-                    <input type="datetime-local" id='endTime' name='endTime' value="2021-04-01T23:00" />
+                    <input type="datetime-local" id='endTime' name='endTime' />
                 </div>
 
                 <input type="submit" id="getGraph" value="Get Graph" />
