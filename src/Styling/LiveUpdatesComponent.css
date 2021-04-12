@@ -1,10 +1,11 @@
 .liveGraph-container {
     display: flex;
-    height: 400px;
-    width: 800px;
-    background-color: #E7ECED;
+    height: 300px;
+    width: 500px;
+    background-color: #F0F3F4;
     box-shadow: -2px 0px 30px -14px #BCA8A4;
     border-radius: 40px;
     align-items: center;
     justify-content: center;
+    margin: 10px
 }

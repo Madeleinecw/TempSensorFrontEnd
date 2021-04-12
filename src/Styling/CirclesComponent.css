@@ -1,10 +1,11 @@
 .circles-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    padding: 20px;
+    justify-content: space-between;
+    padding: 10px;
     margin-left: 10px;
     margin-right: 10px;
+    align-items: center;
 }
 
 .temperatures-circle {
@@ -12,6 +13,7 @@
     padding: 30px;
     border-radius: 100px;
     box-shadow: -2px 0px 30px -14px #BCA8A4;
+    margin: 20px;
 }
 
 .temperatures-circle>.label {
@@ -24,6 +26,7 @@
     padding: 30px;
     border-radius: 100px;
     box-shadow: -2px 0px 30px -14px #BCA8A4;
+    margin: 20px;
 }
 
 .outside-circle>.label {
@@ -35,5 +38,5 @@
     background-color: #C6D5C8;
     padding: 30px;
     border-radius: 100px;
-    box-shadow: -2px 0px 30px -14px #BCA8A4;
+    margin: 20px;
 }

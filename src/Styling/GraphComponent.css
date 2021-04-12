@@ -1,91 +1,98 @@
-#graph-select-form {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    padding: 30px;
-    color: #151D17
-}
-
-#flex-start-graph-input {
-    padding: 10px;
-    color: #151D17;
-}
-
-#startTime ::-webkit-datetime-edit-fields-wrapper {
-    background-color: #F4F0F0;
-}
-
-#flex-start-graph-input>label {
-    margin-right: 10px;
-    color: #151D17;
-    font-size: large;
-}
-
-#startTime {
-    border-radius: 30px;
-    background-color: #F4F0F0;
-    padding: 10px;
-    border: none;
-    box-shadow: -2px 0px 30px -14px #BCA8A4;
-}
-
-#flex-end-graph-input {
-    padding: 10px;
-    color: #151D17;
-}
-
-#flex-end-graph-input>label {
-    margin-right: 10px;
-    color: #151D17;
-    font-size: large;
-}
-
-#endTime {
-    border-radius: 30px;
-    background-color: #F4F0F0;
-    padding: 10px;
-    border: none;
-    box-shadow: -2px 0px 30px -14px #BCA8A4;
-}
-
-#select-graph-text {
-    color: #151D17
-}
-
-#getGraph {
-    background-color: #F4F0F0;
-    border: none;
-    border-radius: 30px;
-    padding: 10px;
-    color: #151D17;
-    box-shadow: -2px 0px 30px -14px #BCA8A4;
-}
-
-.bokeh-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.graph-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.graph-container {
-    display: flex;
-    height: 400px;
-    width: 800px;
-    background-color: #E7ECED;
-    box-shadow: -2px 0px 30px -14px #BCA8A4;
-    border-radius: 40px;
-    align-items: center;
-    justify-content: center;
-}
-
-.noGraph-text {
-    font-size: x-large;
-    color: #151D17;
-}
+    .bokeh-component-wrapper {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    #graph-select-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 30px;
+        color: #151D17
+    }
+    
+    #flex-start-graph-input {
+        padding: 10px;
+        color: #151D17;
+    }
+    
+    #startTime ::-webkit-datetime-edit-fields-wrapper {
+        background-color: #F4F0F0;
+    }
+    
+    #flex-start-graph-input>label {
+        margin-right: 10px;
+        color: #151D17;
+        font-size: large;
+    }
+    
+    #startTime {
+        border-radius: 30px;
+        background-color: #F4F0F0;
+        padding: 10px;
+        border: none;
+        box-shadow: -2px 0px 30px -14px #BCA8A4;
+    }
+    
+    #flex-end-graph-input {
+        padding: 10px;
+        color: #151D17;
+    }
+    
+    #flex-end-graph-input>label {
+        margin-right: 10px;
+        color: #151D17;
+        font-size: large;
+    }
+    
+    #endTime {
+        border-radius: 30px;
+        background-color: #F4F0F0;
+        padding: 10px;
+        border: none;
+        box-shadow: -2px 0px 30px -14px #BCA8A4;
+    }
+    
+    #select-graph-text {
+        color: #151D17
+    }
+    
+    #getGraph {
+        background-color: #F4F0F0;
+        border: none;
+        border-radius: 30px;
+        padding: 10px;
+        color: #151D17;
+        box-shadow: -2px 0px 30px -14px #BCA8A4;
+    }
+    
+    .bokeh-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .graph-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 40px;
+    }
+    
+    .graph-container {
+        display: flex;
+        height: 400px;
+        width: 800px;
+        background-color: #F0F3F4;
+        box-shadow: -2px 0px 30px -14px #BCA8A4;
+        border-radius: 40px;
+        align-items: center;
+        justify-content: center;
+        margin-left: 20px
+    }
+    
+    .noGraph-text {
+        font-size: x-large;
+        color: #151D17;
+    }

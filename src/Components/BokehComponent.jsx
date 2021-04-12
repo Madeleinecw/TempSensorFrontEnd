@@ -74,7 +74,6 @@ const BokehComponent = ({ bokeh, setBokeh }) => {
                 yFormat=">-.0g"
                 axisTop={null}
                 axisRight={null}
-                axisBottom={null}
                 colors={["#A4B8BC", "#BCA4B8", "#A5BDA9"]}
                 enableGridX={false}
                 axisBottom={{
@@ -145,7 +144,6 @@ const BokehComponent = ({ bokeh, setBokeh }) => {
 
     function GraphCheck() {
         if (formattedData === undefined) {
-            console.log('no graph')
             return <NoGraph />;
         }
         else {
@@ -154,7 +152,7 @@ const BokehComponent = ({ bokeh, setBokeh }) => {
     }
 
     return (
-        <div>
+        <div className='bokeh-component-wrapper'>
             <div className='graph-wrapper'>
             <div className='graph-container'>
                 <GraphCheck />

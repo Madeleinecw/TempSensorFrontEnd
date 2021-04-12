@@ -1,6 +1,4 @@
-
-class FormatData{
-formatData = (rangeOfTemperatures) => {
+const formatData = function(rangeOfTemperatures){
         let data = [
             {
                 'id': 'inside',
@@ -37,6 +35,5 @@ formatData = (rangeOfTemperatures) => {
         data[2].data = feelsLike
         return data
     }
-}
 
-export default FormatData
+export default formatData;

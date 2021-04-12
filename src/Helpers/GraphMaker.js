@@ -1,9 +1,7 @@
 import React from 'react';
 import { ResponsiveLine } from '@nivo/line'
 
-class GraphMaker{
-
-    MyResponsiveLine = ({ data }) => (
+const MyResponsiveLine = ({ data }) => (
     <ResponsiveLine data={data}
         margin={{ top: 70, right: 50, bottom: 70, left: 85 }}
         xScale={{ type: 'time', format:"%Y-%m-%d %H:%M"}}
@@ -12,7 +10,6 @@ class GraphMaker{
         yFormat=">-.0g"
         axisTop={null}
         axisRight={null}
-        axisBottom={null}
         colors={["#A4B8BC", "#BCA4B8", "#A5BDA9"]}
         enableGridX={false}
         axisBottom={{
@@ -75,6 +72,6 @@ class GraphMaker{
             }
         ]}
     />
-)}
+)
 
-    export default GraphMaker;
+export default MyResponsiveLine;
