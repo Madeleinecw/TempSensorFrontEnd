@@ -2,13 +2,18 @@ import React, { useState, useEffect } from 'react';
 import MyResponsiveLine from '../Helpers/GraphMaker'
 import formatData from '../Helpers/FormatData'
 import '../Styling/LiveUpdatesComponent.css'
+import socketIOClient from 'socket.io-client'
 
-const LiveUpdatesComponent = () => {
+
+const LiveUpdatesComponent = (te) => {
 
     const [liveFormattedTime, setLiveFormattedTime] = useState();
+    const [updated, setUpdated] = useState();
 
 
     useEffect(() => {
+        const socket = socketIOClient("http://192.168.1.237:5000");
+ 
       let unformatedEnd =  new Date();
       let unformatedStart = new Date(unformatedEnd);
   
@@ -22,20 +27,22 @@ const LiveUpdatesComponent = () => {
       fetch(`http://192.168.1.237:5000/getgraph/${start}/${end}`)
               .then(response => response.json())
               .then(data => setLiveFormattedTime(formatData(data)));
-    }, [])
+
+        socket.on('updated', (msg) => {  
+        setUpdated(msg.updated)
+        });
+    }, [updated])
 
 
     function NoGraph() {
-        return <div className="noGraph-text">There's no formatted data</div>;
+        return <div className="noGraph-text">Loading the live graph</div>;
     }
 
     function GraphCheck() {
         if (liveFormattedTime === undefined) {
-            console.log('false');
             return <NoGraph />;
         }
         else {
-            console.log('true');
             console.log(liveFormattedTime)
             return <MyResponsiveLine data={liveFormattedTime} />
         }

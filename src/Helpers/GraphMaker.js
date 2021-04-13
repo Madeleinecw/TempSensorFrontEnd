@@ -12,6 +12,13 @@ const MyResponsiveLine = ({ data }) => (
         axisRight={null}
         colors={["#A4B8BC", "#BCA4B8", "#A5BDA9"]}
         enableGridX={false}
+        tooltip={(input) => {
+            return (
+            <div>
+             X:{input.point.data.xFormatted} 
+             <p> Y :{input.point.data.y}&#176;C</p>
+            </div>
+          )}}
         axisBottom={{
             orient: 'bottom',
             format: '%Y-%m-%d %H:%M',
