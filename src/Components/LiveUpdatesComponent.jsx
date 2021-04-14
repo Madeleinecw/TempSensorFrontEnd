@@ -5,33 +5,40 @@ import '../Styling/LiveUpdatesComponent.css'
 import socketIOClient from 'socket.io-client'
 
 
-const LiveUpdatesComponent = (te) => {
+const LiveUpdatesComponent = () => {
 
     const [liveFormattedTime, setLiveFormattedTime] = useState();
-    const [updated, setUpdated] = useState();
+    const [mostRecentTimestamp, setMostRecentTimestamp] = useState();
 
 
     useEffect(() => {
         const socket = socketIOClient("http://192.168.1.237:5000");
- 
-      let unformatedEnd =  new Date();
-      let unformatedStart = new Date(unformatedEnd);
-  
-      unformatedStart.setDate(unformatedStart.getDate() - 1)
-      unformatedStart.setSeconds(0,0);
-      unformatedEnd.setSeconds(0,0);
-  
-      let start = new Date(unformatedStart).toISOString().replace(/:00.000Z/, "");
-      let end = new Date(unformatedEnd).toISOString().replace(/:00.000Z/, "");
-  
-      fetch(`http://192.168.1.237:5000/getgraph/${start}/${end}`)
-              .then(response => response.json())
-              .then(data => setLiveFormattedTime(formatData(data)));
 
         socket.on('updated', (msg) => {  
-        setUpdated(msg.updated)
+            setMostRecentTimestamp(msg.updated)
         });
-    }, [updated])
+    }, [])
+
+    useEffect(() => {
+        let unformatedEnd =  new Date();
+        let unformatedStart = new Date(unformatedEnd);
+
+        unformatedStart.setDate(unformatedStart.getDate() - 1)
+        unformatedStart.setSeconds(0,0);
+        unformatedEnd.setSeconds(0,0);
+
+        let start = new Date(unformatedStart).toISOString().replace(/:00.000Z/, "");
+        let end = new Date(unformatedEnd).toISOString().replace(/:00.000Z/, "");
+
+        console.log(end)
+
+        fetch(`http://192.168.1.237:5000/getgraph/${start}/${end}`)
+            .then(response => response.json())
+            .then(data => setLiveFormattedTime(formatData(data)));
+
+        console.log(liveFormattedTime)
+
+    }, [mostRecentTimestamp])
 
 
     function NoGraph() {
